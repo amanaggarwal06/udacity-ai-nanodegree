@@ -4,8 +4,8 @@
 #
 # TODO 0: Add your information below for Programmer & Date Created.                                                                             
 # PROGRAMMER: Aman Aggarwal
-# DATE CREATED:      05-07-2023                            
-# REVISED DATE:      07-07-2023
+# DATE CREATED: 05/07/2023
+# REVISED DATE: 10/07/2023
 # PURPOSE: Classifies pet images using a pretrained CNN model, compares these
 #          classifications to the true identity of the pets in the images, and
 #          summarizes how well the CNN performed on the image classification task. 
@@ -40,8 +40,7 @@ from print_results import print_results
 # Main program function defined below
 def main():
     # TODO 0: Measures total program runtime by collecting start time
-    starttime = time() 
-    print(starttime)
+    start_time = time()
     
     # TODO 1: Define get_input_args function within the file get_input_args.py
     # This function retrieves 3 Command Line Arugments from user as input from
@@ -49,9 +48,6 @@ def main():
     # the collection of these command line arguments from the function call as
     # the variable in_arg
     in_arg = get_input_args()
-
-    # Function that checks command line arguments using in_arg  
-    check_command_line_arguments(in_arg)
 
     
     # TODO 2: Define get_pet_labels function within the file get_pet_labels.py
@@ -118,9 +114,8 @@ def main():
     
     # TODO 0: Measure total program runtime by collecting end time
     end_time = time()
-    
-    # TODO 0: Computes overall runtime in seconds & prints it in hh:mm:ss format
-    tot_time = end_time - starttime #calculate difference between end time and start time
+      # TODO 0: Computes overall runtime in seconds & prints it in hh:mm:ss format
+    tot_time = end_time - start_time#calculate difference between end time and start time
     print("\n** Total Elapsed Runtime:",
           str(int((tot_time/3600)))+":"+str(int((tot_time%3600)/60))+":"
           +str(int((tot_time%3600)%60)) )

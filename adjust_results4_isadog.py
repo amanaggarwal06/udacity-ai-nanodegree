@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/adjust_results4_isadog.py
 #                                                                             
-# PROGRAMMER: 
-# DATE CREATED:                                 
+# PROGRAMMER: Aman Aggarwal
+# DATE CREATED: 10/07/2023                                
 # REVISED DATE: 
 # PURPOSE: Create a function adjust_results4_isadog that adjusts the results 
 #          dictionary to indicate whether or not the pet image label is of-a-dog, 
@@ -66,36 +66,31 @@ def adjust_results4_isadog(results_dic, dogfile):
                maltese) (string - indicates text file's filename)
     Returns:
            None - results_dic is mutable data type so no return needed.
-    """    
+    """           
     dognames_dic = dict()
     
     with open(dogfile, "r") as infile:
-            
         line = infile.readline()
-            
+        
         while line != "":
-                
-            line = line.rstrip()  # removed all new line characters
-                
-            if line not in dognames_dic.keys():
+            line = line.rstrip()
+            if line in dognames_dic:
+                None
+            else:
                 dognames_dic[line] = 1
-                  
-  
-                line = infile.readline()     
                 
-                
-    for key in results_dic:
-        
-        if results_dic[key][0] in dognames_dic:
-            
-            if results_dic[key][1] in dognames_dic:
-                results_dic[key].extend((1, 1))
+            line = infile.readline()    
+
+        # Check to see if results_dic items are dogs
+        for key in results_dic:
+            if results_dic[key][0] in dognames_dic:
+                if results_dic[key][1] in dognames_dic:
+                    results_dic[key].extend((1, 1))
+                else:
+                    results_dic[key].extend((1,0))
             else:
-                 results_dic[key].extend((1, 0))
-        
-        else:
-            if results_dic[key][1] in dognames_dic:
-                results_dic[key].extend((0, 1))
-            else:
-                results_dic[key].extend((0, 0))
+                if results_dic[key][1] in dognames_dic:
+                    results_dic[key].extend((0,1))
+                else:
+                    results_dic[key].extend((0,0))
     None
