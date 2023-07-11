@@ -1,10 +1,7 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# */AIPND-revision/intropyproject-classify-pet-images/classify_images.py
-#                                                                             
+#!/usr/bin/env python3                                                                          
 # PROGRAMMER: Aman Aggarwal
 # DATE CREATED: 10/07/2023
-# REVISED DATE: 
+# REVISED DATE: 11/07/2023
 # PURPOSE: Create a function classify_images that uses the classifier function 
 #          to create the classifier labels and then compares the classifier 
 #          labels to the pet image labels. This function inputs:
@@ -66,30 +63,30 @@ def classify_images(images_dir, results_dic, model):
            None - results_dic is mutable data type so no return needed.         
     """
     for key in results_dic:
+        # initialisig model label first
+
         model_label = ""
-        classified = classifier(images_dir+'/'+key,model)
+        demo = classifier(images_dir+'/'+key,model)
  
-        low_pet_image = classified.lower()
+        low_pet_image = demo.lower()
         
+  # making the classifier label to be able to get compare with the pet label.
 
         word_list_pet_image = low_pet_image
-        """
-        pet_name = ""
-        
-        for word in word_list_pet_image:
-            if word.isalpha():
-                pet_name += word + " " """
         low_pet_image = low_pet_image.strip()
-        #print("Classifier: " + low_pet_image)
         model_label = low_pet_image
-        
-        #results_dic[key].append(model_label)
         truth = results_dic[key][0]
-        
-        # Classifier Label
+
+# if it gets match then 1 is stored in the second index
+
         if truth in model_label:
            results_dic[key].extend((model_label,1))
+
+  # if not found then 0  is stored in the second index of the list in the value of the results dictionary
+
         else:
            results_dic[key].extend((model_label,0))
+        
+        # priting the rsults dictionary!!
         
     print(results_dic)
