@@ -68,19 +68,39 @@ def calculates_results_stats(results_dic):
                      and the previous topic Calculating Results in the class for details
                      on how to calculate the counts and statistics.
     """        
+    # Creates empty dictionary for results_stats_dic
+
     results_stats_dic = dict()
-    
+
+
+     # Sets all counters to initial values of zero so that they can 
+    # be incremented while processing through the images in results_dic 
+
     results_stats_dic['n_dogs_img'] = 0
     results_stats_dic['n_match'] = 0
     results_stats_dic['n_correct_dogs'] = 0
     results_stats_dic['n_correct_notdogs'] = 0
-    results_stats_dic['n_correct_breed'] = 0       
+    results_stats_dic['n_correct_breed'] = 0    
+
+    # process through the results dictionary   
     
     for key in results_dic:
         # finding the  key match in stats dictionary
          
         if results_dic[key][2] == 1:
             results_stats_dic['n_match'] += 1
+
+         # TODO: 5a. REPLACE pass with CODE that counts how many pet images of
+        #           dogs had their breed correctly classified. This happens 
+        #           when the pet image label indicates the image is-a-dog AND 
+        #           the pet image label and the classifier label match. You 
+        #           will need to write a conditional statement that determines
+        #           when the dog breed is correctly classified and then 
+        #           increments 'n_correct_breed' by 1. Recall 'n_correct_breed' 
+        #           is a key in the results_stats_dic dictionary with it's value 
+        #           representing the number of correctly classified dog breeds.
+        #           
+        # Pet Image Label is a Dog AND Labels match- counts Correct Breed
             
         if results_dic[key][3] == 1 and results_dic[key][2] == 1:
             results_stats_dic['n_correct_breed'] += 1
@@ -90,7 +110,22 @@ def calculates_results_stats(results_dic):
     
             if results_dic[key][4] == 1:
                 results_stats_dic['n_correct_dogs'] += 1
- # if not found then we did this
+
+        # TODO: 5b. REPLACE pass with CODE that counts how many pet images 
+        #           that are NOT dogs were correctly classified. This happens 
+        #           when the pet image label indicates the image is-NOT-a-dog 
+        #           AND the classifier label indicates the images is-NOT-a-dog.
+        #           You will need to write a conditional statement that 
+        #           determines when the classifier label indicates the image 
+        #           is-NOT-a-dog and then increments 'n_correct_notdogs' by 1. 
+        #           Recall the 'else:' above 'pass' already indicates that the 
+        #           pet image label indicates the image is-NOT-a-dog and 
+        #          'n_correct_notdogs' is a key in the results_stats_dic dictionary 
+        #           with it's value representing the number of correctly 
+        #           classified NOT-a-dog images.
+        #           
+        # Pet Image Label is NOT a Dog
+    # if not found then we did this
 
         else:
             if results_dic[key][4] == 0:
@@ -103,23 +138,28 @@ def calculates_results_stats(results_dic):
     results_stats_dic['n_notdogs_img'] = (results_stats_dic['n_images'] - 
                                       results_stats_dic['n_dogs_img']) 
     
-    # percentage match
+    # percentage of total correct matches
 
     results_stats_dic['pct_match'] = (results_stats_dic['n_match']/results_stats_dic['n_images'])*100
     
-    # percentage correct match
+    # percentage correct dogs matches
 
     results_stats_dic['pct_correct_dogs'] = (results_stats_dic['n_correct_dogs']/results_stats_dic['n_dogs_img'])*100
     
-    #percentage correct breed match
+    # percentage of correct breed matched
     
     results_stats_dic['pct_correct_breed'] = (results_stats_dic['n_correct_breed']/results_stats_dic['n_dogs_img'])*100
     
-    # results stats dictionary comparison 
+    # comparing the stats inside the results statistics dictionary
+
     if results_stats_dic['n_notdogs_img'] > 0:
         results_stats_dic['pct_correct_notdogs'] = (results_stats_dic['n_correct_notdogs'] /
                                                 results_stats_dic['n_notdogs_img'])*100.0
     else:
         results_stats_dic['pct_correct_notdogs'] = 0.0
+
+
+    # TODO 5f. REPLACE None with the results_stats_dic dictionary that you 
+    # created with this function 
 
     return results_stats_dic
